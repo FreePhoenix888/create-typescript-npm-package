@@ -18,7 +18,7 @@ async function main() {
 
   program
     .option(
-      '--directory-path <path>',
+      '--directory <path>',
       'The path of the directory where the package will be created'
     )
     .option('--package-name <name>', 'The name of the package')
@@ -31,30 +31,30 @@ async function main() {
   program.parse(process.argv);
 
   const {
-    directoryPath = 'typescript-npm-package',
+    directory = 'typescript-npm-package',
     packageName,
     description = '',
     repositoryUrl = '',
   } = program.opts<Options>();
   if (!packageName) throw new Error('Please provide a package name by using --package-name option');
 
-  if (await fsExtra.pathExists(directoryPath)) {
-    throw new Error(`The directory ${directoryPath} already exists`);
+  if (await fsExtra.pathExists(directory)) {
+    throw new Error(`The directory ${directory} already exists`);
   }
 
-  const { execPromise: gitInitExecPromise } = exec(`git clone https://github.com/FreePhoenix888/typescript-npm-package-template.git ${directoryPath}`);
+  const { execPromise: gitInitExecPromise } = exec(`git clone https://github.com/FreePhoenix888/typescript-npm-package-template.git ${directory}`);
   const gitInitResult = await gitInitExecPromise;
   if (gitInitResult.exitCode !== 0) {
     throw new Error(gitInitResult.stderrOutput);
   }
   console.log(gitInitResult.stdoutOutput);
-  await fsExtra.remove(path.join(directoryPath, '.git'));
+  await fsExtra.remove(path.join(directory, '.git'));
 
-  await setup({ packageName, description, repositoryUrl, path: directoryPath });
+  await setup({ packageName, description, repositoryUrl, path: directory });
 }
 
 export interface Options {
-  directoryPath: string;
+  directory: string;
   packageName: string;
   description: string;
   repositoryUrl: string;
