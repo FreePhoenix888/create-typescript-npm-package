@@ -1,7 +1,7 @@
 {
   "name": "@freephoenix888/create-typescript-npm-package",
   "keywords": [],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Creates typescript npm package",
   "repository": {
     "type": "git",
