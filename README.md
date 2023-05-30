@@ -5,5 +5,5 @@ Creates a new npm package with typescript support. Uses [https://www.npmjs.com/p
 
 # Usage
 ```bash
-npm init @freephoenix888/typescript-npm-package
+npx @freephoenix888/typescript-npm-package@latest --package-name <PACKAGE_NAME> --directory <DIRECTORY>
 ```
